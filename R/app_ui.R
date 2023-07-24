@@ -10,7 +10,8 @@ app_ui <- function(request) {
     golem_add_external_resources(),
     # Your application UI logic
     fluidPage(
-      h1("coopcredview")
+      h1("coopcredview"),
+      h4("teste")
     )
   )
 }
