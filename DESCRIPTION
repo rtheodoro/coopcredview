@@ -1,0 +1,17 @@
+usPackage: coopcredview
+Title: Visualização de Cooperativas de Crédito
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Ricardo",
+           family = "Theodoro",
+           role = c("aut", "cre"),
+           email = "rtheodoro@usp.br")
+Description: Dashboard para visualização de informações sobre as cooperativas de crédito brasileiras.
+License: MIT + file LICENSE
+Imports: 
+    config (>= 0.3.1),
+    golem (>= 0.4.1),
+    shiny (>= 1.7.4)
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.2.3
