@@ -12,6 +12,7 @@ Imports:
     bs4Dash,
     config (>= 0.3.1),
     dplyr,
+    echarts4r,
     golem (>= 0.4.1),
     leaflet,
     shiny (>= 1.7.4.1)

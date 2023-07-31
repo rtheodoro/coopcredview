@@ -10,8 +10,24 @@ app_ui <- function(request) {
     golem_add_external_resources(),
     # Your application UI logic
     fluidPage(
-      h1("coopcredview"),
-      h4("teste")
+      titlePanel("Balanços das Cooperativas de Crédito Brasileiras"),
+      sidebarLayout(
+         sidebarPanel(
+            selectInput(
+               inputId = "rs_coop",
+               label = "Selecione uma Cooperativa",
+               choices = ""
+            ),
+            selectInput(
+               inputId = "conta",
+               label = "Selecione uma conta",
+               choices = ""
+            )
+         ),
+         mainPanel(
+            echarts4r::echarts4rOutput("g_evolucao_conta")
+         )
+      )
     )
   )
 }
