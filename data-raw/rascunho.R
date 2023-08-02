@@ -17,7 +17,7 @@ colnames(balanco) <- ifelse(!is.na(nomes_correspondentes),
                             paste(names(balanco), nomes_correspondentes, sep = "_"),
                             names(balanco))
 
-#write.csv(balanco, "inst/data/balanco_coop_cred_2010a2022_4010.csv", row.names = FALSE)
+write.csv(balanco, "inst/data/balanco_coop_cred_2010a2022_4010.csv", row.names = FALSE)
 balanco |>
    dplyr::filter(razao_social == "BOM CREDI") |>
    dplyr::mutate(ano = as.Date(sprintf("%s-%s-01", substr(ano, 1, 4), substr(ano, 5, 6)))) |>

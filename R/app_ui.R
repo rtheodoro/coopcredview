@@ -5,31 +5,40 @@
 #' @import shiny
 #' @noRd
 app_ui <- function(request) {
-  tagList(
-    # Leave this function for adding external resources
-    golem_add_external_resources(),
-    # Your application UI logic
-    fluidPage(
-      titlePanel("Balanços das Cooperativas de Crédito Brasileiras"),
-      sidebarLayout(
-         sidebarPanel(
-            selectInput(
-               inputId = "rs_coop",
-               label = "Selecione uma Cooperativa",
-               choices = ""
-            ),
-            selectInput(
-               inputId = "conta",
-               label = "Selecione uma conta",
-               choices = ""
+   tagList(
+      # Leave this function for adding external resources
+      golem_add_external_resources(),
+      # Your application UI logic
+      bs4Dash::bs4DashPage(
+         bs4Dash::bs4DashNavbar(title = "CoopCred View"),
+         bs4Dash::bs4DashSidebar(
+            bs4Dash::bs4SidebarMenu(
+               bs4Dash::bs4SidebarMenuItem(text = "Início",
+                                           tabName = "inicio"),
+               bs4Dash::bs4SidebarMenuItem(text = "Análise dos Balanços",
+                                           tabName = "anbalancos"),
+               bs4Dash::bs4SidebarMenuItem(
+                  text = "Estrutura de Governança",
+                  bs4Dash::bs4SidebarMenuSubItem(text = "Info. Gerais",
+                                                 tabName = "infogerais"),
+                  bs4Dash::bs4SidebarMenuSubItem(text = "Estrutura de Governança",
+                                                 tabName = "estrutgov")
+               ),
+               bs4Dash::bs4SidebarMenuItem(text = "Distribuição das Coop. Créd.",
+                                           tabName = "districoop")
             )
          ),
-         mainPanel(
-            echarts4r::echarts4rOutput("g_evolucao_conta")
-         )
+
+         bs4Dash::bs4DashBody(bs4Dash::bs4TabItems(
+            bs4Dash::bs4TabItem(tabName = "inicio",
+                                mod_inicio_ui("inicio_1")),
+            bs4Dash::bs4TabItem(tabName = "anbalancos",
+                                mod_balancos_patrimoniais_ui("balancos_patrimoniais_1")),
+            bs4Dash::bs4TabItem(tabName = "districoop",
+                                mod_dist_coopcred_ui("dist_coopcred_1")),
+         ))
       )
-    )
-  )
+   )
 }
 
 #' Add external Resources to the Application
