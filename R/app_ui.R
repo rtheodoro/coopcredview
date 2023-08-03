@@ -35,7 +35,7 @@ app_ui <- function(request) {
             bs4Dash::bs4TabItem(tabName = "anbalancos",
                                 mod_balancos_patrimoniais_ui("balancos_patrimoniais_1")),
             bs4Dash::bs4TabItem(tabName = "districoop",
-                                mod_dist_coopcred_ui("dist_coopcred_1")),
+                                mod_dist_coopcred_ui("dist_coopcred_1"))
          ))
       )
    )
