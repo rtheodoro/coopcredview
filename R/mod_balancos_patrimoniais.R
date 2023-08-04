@@ -9,26 +9,34 @@
 #' @importFrom shiny NS tagList
 mod_balancos_patrimoniais_ui <- function(id){
   ns <- NS(id)
-  tagList(
-     sidebarLayout(
-        sidebarPanel(
-           selectInput(
-              inputId = ns("rs_coop"),
-              label = "Selecione uma Cooperativa",
-              choices = ""
+
+     bs4Dash::box(
+        title = "Visualização das informações contidas nos Balanços Patrimoniais das Cooperativas de Crédito!",
+        solidHeader = TRUE,
+        collapsible = FALSE,
+        width = 12,
+        p("As cooperativas listadas aqui são apenas aquelas que enviaram seus balanços em 12/2022. As demais foram removidas da análise."),
+        sidebarLayout(
+           sidebarPanel(
+              selectInput(
+                 inputId = ns("rs_coop"),
+                 label = "Selecione uma Cooperativa",
+                 choices = ""
+              ),
+              selectInput(
+                 inputId = ns("conta"),
+                 label = "Selecione uma conta",
+                 choices = ""
+              )
            ),
-           selectInput(
-              inputId = ns("conta"),
-              label = "Selecione uma conta",
-              choices = ""
+           mainPanel(
+              echarts4r::echarts4rOutput(ns("g_evolucao_conta"))
            )
-        ),
-        mainPanel(
-           echarts4r::echarts4rOutput(ns("g_evolucao_conta"))
         )
      )
 
-  )
+
+
 }
 
 #' balancos_patrimoniais Server Functions

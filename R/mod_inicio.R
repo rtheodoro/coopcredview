@@ -17,6 +17,7 @@ mod_inicio_ui <- function(id){
      p("Este é um aplicado criado em Shiny utilizando Golem para o curso de Dashboard II da Curso-R."),
      p("O objetivo deste aplicativo é exibir diversas informações sobre as Cooperativas de Crédito Brasilerias."),
      p("O aplicativo ainda esta em desenvolvimento, as informações aqui não devem ser utilizadas como fonte de pesquisa.")
+
   )
 }
 
