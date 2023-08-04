@@ -1,5 +1,5 @@
 
-balanco <- read.csv(app_sys("data/balanco_coop_cred_2010a2022_4010.csv"))
+balanco <- data.table::fread(app_sys("data/balanco_coop_cred_2010a2022_4010.csv"))
 dicionario <- read.csv(app_sys("data/dicionario.CSV")) |> janitor::clean_names()
 
 dicionario <- dicionario |>

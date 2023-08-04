@@ -11,10 +11,12 @@ License: MIT + file LICENSE
 Imports: 
     bs4Dash,
     config (>= 0.3.1),
+    data.table,
     dplyr,
     echarts4r,
     golem (>= 0.4.1),
     leaflet,
+    reactable,
     shiny (>= 1.7.4.1)
 Encoding: UTF-8
 LazyData: true
