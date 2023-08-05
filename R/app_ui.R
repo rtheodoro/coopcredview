@@ -15,7 +15,7 @@ app_ui <- function(request) {
             bs4Dash::bs4SidebarMenu(
                bs4Dash::bs4SidebarMenuItem(text = "Início",
                                            tabName = "inicio"),
-               bs4Dash::bs4SidebarMenuItem(text = "Análise dos Balanços",
+               bs4Dash::bs4SidebarMenuItem(text = "Informações Financeiras",
                                            tabName = "anbalancos"),
                bs4Dash::bs4SidebarMenuItem(
                   text = "Estrutura de Governança",

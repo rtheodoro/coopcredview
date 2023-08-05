@@ -11,11 +11,11 @@ mod_balancos_patrimoniais_ui <- function(id){
   ns <- NS(id)
 
      bs4Dash::box(
-        title = "Visualização das informações contidas nos Balanços Patrimoniais das Cooperativas de Crédito!",
+        title = "Visualização de informações financeiras das Cooperativas de Crédito que enviaram seus balanços em 12/2022 e estavam ativas em 08/2023",
         solidHeader = TRUE,
         collapsible = FALSE,
         width = 12,
-        p("As cooperativas listadas aqui são apenas aquelas que enviaram seus balanços em 12/2022. As demais foram removidas da análise."),
+        p("Balanço Patrimonial (4010)."),
         sidebarLayout(
            sidebarPanel(
               selectInput(
@@ -68,7 +68,6 @@ mod_balancos_patrimoniais_server <- function(id){
     })
 
     output$g_evolucao_conta <- echarts4r::renderEcharts4r({
-
 
        balanco |>
           dplyr::filter(razao_social == input$rs_coop) |>
