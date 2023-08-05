@@ -11,7 +11,7 @@ mod_estrut_gov_ui <- function(id){
   ns <- NS(id)
 
   bs4Dash::box(
-        title = "Estrutura de Governança da Cooperativa de Crédito em 07/2022",
+        title = "Estrutura de Governança das Cooperativas de Crédito em 07/2022",
      reactable::reactableOutput(ns("tabela_governanca"))
   )
 }
