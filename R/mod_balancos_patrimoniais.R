@@ -44,18 +44,21 @@ mod_balancos_patrimoniais_server <- function(id){
   moduleServer( id, function(input, output, session){
     ns <- session$ns
 
-    balanco <- read.csv(app_sys("data/balanco_coop_cred_2010a2022_4010.csv"))
+    balanco <- data.table::fread(app_sys("data/balanco_coop_cred_1993a2022_4010.csv")) |>
+       dplyr::mutate(cooperativa = paste(cnpj, razao_social, sep = " - "),
+                     cooperativa = iconv(cooperativa,  "latin1", "UTF-8", "?"))
+
 
     updateSelectInput(
        inputId = "rs_coop",
-       choices = balanco |> dplyr::select(razao_social) |> unique() |> dplyr::arrange(razao_social)
+       choices = balanco |> dplyr::arrange(razao_social) |> dplyr::select(cooperativa) |> unique()
     )
 
     observe({
        req(input$rs_coop)
        conta <- balanco |>
-          dplyr::filter(razao_social == input$rs_coop) |>
-          dplyr::select(where(~ any(!is.na(.))), -ano, -cnpj, -razao_social) |>
+          dplyr::filter(cooperativa == input$rs_coop) |>
+          dplyr::select(where(~ any(!is.na(.))), -ano, -cnpj, -razao_social, -cooperativa) |>
           names() |>
           unique()
 
@@ -68,8 +71,7 @@ mod_balancos_patrimoniais_server <- function(id){
     output$g_evolucao_conta <- echarts4r::renderEcharts4r({
 
        balanco |>
-          dplyr::filter(razao_social == input$rs_coop) |>
-          dplyr::mutate(ano = as.Date(sprintf("%s-%s-01", substr(ano, 1, 4), substr(ano, 5, 6)))) |>
+          dplyr::filter(cooperativa == input$rs_coop) |>
           echarts4r::e_chart(x = ano) |>
           echarts4r::e_line_(serie = input$conta)
     })

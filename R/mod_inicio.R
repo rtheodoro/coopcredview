@@ -18,11 +18,12 @@ mod_inicio_ui <- function(id){
      p("O objetivo deste aplicativo é exibir diversas informações sobre as Cooperativas de Crédito Brasilerias, disponibilizadas pelo Bacen em 08/2023."),
      p("O aplicativo ainda esta em desenvolvimento, ", tags$strong("as informações aqui não devem ser utilizadas como fonte de pesquisa.")),
      tags$div(
-        tags$h6(tags$strong("Repositórios importantes:")),
+        tags$h6(tags$strong("Repositórios utilizados:")),
         tags$ul(
            tags$li("Código deste app:", tags$a("https://github.com/rtheodoro/coopcredview", href = "https://github.com/rtheodoro/coopcredview", target = "_blank")),
            tags$li("Código do webscraping dos Órgãos Estatutários:", tags$a("https://github.com/rtheodoro/orgaos-estatutarios-coop-cred-bacen", href = "https://github.com/rtheodoro/orgaos-estatutarios-coop-cred-bacen", target = "_blank")),
            tags$li("Código do webscraping dos Balanços Patrimoniais:", tags$a("https://github.com/rtheodoro/webscraping-balancos-patrimoniais-de-coop-cred", href = "https://github.com/rtheodoro/webscraping-balancos-patrimoniais-de-coop-cred", target = "_blank")),
+           tags$li("Fique a vontade para contribuir e deixar a estrelinha! :D")
         )
      ),
      tags$div(
