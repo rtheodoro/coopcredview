@@ -10,7 +10,7 @@
 mod_dist_coop_ui <- function(id){
   ns <- NS(id)
   bs4Dash::box(
-     title = "Mapa das Cooperativa de Crédito em 07/2022",
+     title = "Mapa das Cooperativa de Crédito em 08/2023",
      leaflet::leafletOutput(ns("mapa"))
   )
 }
@@ -22,7 +22,7 @@ mod_dist_coop_server <- function(id){
   moduleServer( id, function(input, output, session){
     ns <- session$ns
 
-    localizacao_coop <- read.csv(app_sys("data/202307_CoopCred_BCB_info_gerais.csv")) |>
+    localizacao_coop <- read.csv(app_sys("data/202308_CoopCred_BCB_info_gerais.csv")) |>
        dplyr::select(municipio, uf)
 
     output$mapa <- leaflet::renderLeaflet({

@@ -19,7 +19,7 @@ app_ui <- function(request) {
                                            tabName = "anbalancos"),
                bs4Dash::bs4SidebarMenuItem(
                   text = "Estrutura de Governança",
-                  bs4Dash::bs4SidebarMenuSubItem(text = "Info. Gerais",
+                  bs4Dash::bs4SidebarMenuSubItem(text = "Informações Gerais",
                                                  tabName = "infogerais"),
                   bs4Dash::bs4SidebarMenuSubItem(text = "Órgãos Estatutários",
                                                  tabName = "orgest")

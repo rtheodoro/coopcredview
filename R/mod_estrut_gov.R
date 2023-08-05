@@ -13,7 +13,7 @@ mod_estrut_gov_ui <- function(id){
   fluidRow(column(
      7,
      bs4Dash::box(
-        title = "Estrutura de Governança das Cooperativas de Crédito em 07/2023",
+        title = "Estrutura de Governança das Cooperativas de Crédito em 08/2023",
         reactable::reactableOutput(ns("tabela_governanca")),
         width = 12
      )),
@@ -21,7 +21,7 @@ mod_estrut_gov_ui <- function(id){
         5,
         bs4Dash::box(
            title = tippy::tippy(
-              "Contagem de Gênero em Cooperativas de Crédito em 07/2023",
+              "Contagem de Gênero em Cooperativas de Crédito em 08/2023",
               "As informações foram geradas a partir do primeiro nome, podem ter um grau de imprecisão"
            ),
            width = 12,
@@ -31,7 +31,7 @@ mod_estrut_gov_ui <- function(id){
               choices = c(
                  "Todas",
                  read.csv(
-                    app_sys("data/202307_CoopCred_BCB_estrutura_governanca.csv")
+                    app_sys("data/202308_CoopCred_BCB_estrutura_governanca.csv")
                  ) |>
                     dplyr::mutate(Cooperativa = paste(cnpj, nomec, sep = " - ")) |> dplyr::select(Cooperativa) |> unique()
               )
@@ -56,7 +56,7 @@ mod_estrut_gov_server <- function(id){
   moduleServer( id, function(input, output, session){
     ns <- session$ns
 
-    estrut_gov <- read.csv(app_sys("data/202307_CoopCred_BCB_estrutura_governanca.csv")) |>
+    estrut_gov <- read.csv(app_sys("data/202308_CoopCred_BCB_estrutura_governanca.csv")) |>
        dplyr::mutate(Cooperativa = paste(cnpj, nomec, sep = " - "))
 
     output$tabela_governanca <- reactable::renderReactable({
