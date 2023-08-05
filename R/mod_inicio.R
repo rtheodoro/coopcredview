@@ -29,7 +29,8 @@ mod_inicio_ui <- function(id){
      tags$div(
         tags$h6(tags$strong("Próximos passos:")),
         tags$ul(
-           tags$li("Item 1: Melhorar a visualização dos balanços. - Filtrar apenas Coops Ativas em 2023."),
+           tags$li("Não consegui adicionar a logo ao lado de CoopCred View (o favicon esta o antigo também)."),
+           tags$li("Item 1: Melhorar a visualização dos balanços."),
            tags$li("Item 2: Melhorar mapa."),
            tags$li("Item 3: Adicionar informações dos auditores independentes."),
            tags$li("Item 4: Adicionar informações do IF Data."),
