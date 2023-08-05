@@ -11,17 +11,18 @@ mod_estrut_gov_ui <- function(id){
   ns <- NS(id)
 
   tagList(
-     bs4Dash::box(title = "Estrutura de Governança das Cooperativas de Crédito em 07/2022",
+     bs4Dash::box(title = "Estrutura de Governança das Cooperativas de Crédito em 07/2023",
                   reactable::reactableOutput(ns(
                      "tabela_governanca"
                   ))),
      bs4Dash::box(
-        title = tippy::tippy("Contagem de Gênero em Cooperativas de Crédito em 07/2022",
+        title = tippy::tippy("Contagem de Gênero em Cooperativas de Crédito em 07/2023",
                              "As informações foram geradas a partir do primeiro nome, podem ter um grau de imprecisão"),
         shiny::selectInput(
            ns("cooperativa_select"),
            "Escolha uma Cooperativa:",
-           choices = c("Todas", read.csv(app_sys("data/202307_CoopCred_BCB_estrutura_governanca.csv")) |> dplyr::select(nomec) |> unique())
+           choices = c("Todas", read.csv(app_sys("data/202307_CoopCred_BCB_estrutura_governanca.csv")) |>
+                          dplyr::mutate(Cooperativa = paste(cnpj, nomec, sep = " - ")) |> dplyr::select(Cooperativa) |> unique())
         ),
         shiny::radioButtons(
            ns("info_type"),
@@ -42,7 +43,8 @@ mod_estrut_gov_server <- function(id){
   moduleServer( id, function(input, output, session){
     ns <- session$ns
 
-    estrut_gov <- read.csv(app_sys("data/202307_CoopCred_BCB_estrutura_governanca.csv"))
+    estrut_gov <- read.csv(app_sys("data/202307_CoopCred_BCB_estrutura_governanca.csv")) |>
+       dplyr::mutate(Cooperativa = paste(cnpj, nomec, sep = " - "))
 
     output$tabela_governanca <- reactable::renderReactable({
        reactable::reactable(
@@ -73,7 +75,7 @@ mod_estrut_gov_server <- function(id){
        }
 
        if (input$cooperativa_select != "Todas") {
-          data <- subset(data, nomec == input$cooperativa_select)
+          data <- subset(data, Cooperativa == input$cooperativa_select)
        }
 
        list(data = data, x_axis = x_axis)

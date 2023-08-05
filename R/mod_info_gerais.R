@@ -11,7 +11,7 @@ mod_info_gerais_ui <- function(id){
   ns <- NS(id)
 
   bs4Dash::box(
-     title = "Informações gerais das Cooperativa de Crédito em 07/2022",
+     title = "Informações gerais das Cooperativa de Crédito em 07/2023",
      reactable::reactableOutput(ns("info_gerais"))
   )
 
