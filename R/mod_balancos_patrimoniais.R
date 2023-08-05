@@ -11,11 +11,11 @@ mod_balancos_patrimoniais_ui <- function(id){
   ns <- NS(id)
 
      bs4Dash::box(
-        title = "Visualização de informações financeiras das Cooperativas de Crédito que enviaram seus balanços em 12/2022 e estavam ativas em 08/2023",
+        title = tippy::tippy("Visualização de informações financeiras das Cooperativas de Crédito", "Que enviaram seus balanços em 12/2022 e estavam ativas em 08/2023"),
         solidHeader = TRUE,
         collapsible = FALSE,
         width = 12,
-        p("Balanço Patrimonial (4010)."),
+        p(tippy::tippy("Balanço Patrimonial (4010).", "Consulte em: https://www.bcb.gov.br/acessoinformacao/legado?url=https:%2F%2Fwww4.bcb.gov.br%2Ffis%2Fcosif%2Fbalancetes.asp",  placement = "right")),
         sidebarLayout(
            sidebarPanel(
               selectInput(
@@ -34,8 +34,6 @@ mod_balancos_patrimoniais_ui <- function(id){
            )
         )
      )
-
-
 
 }
 
