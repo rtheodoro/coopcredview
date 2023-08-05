@@ -10,29 +10,42 @@
 mod_estrut_gov_ui <- function(id){
   ns <- NS(id)
 
-  tagList(
-     bs4Dash::box(title = "Estrutura de Governança das Cooperativas de Crédito em 07/2023",
-                  reactable::reactableOutput(ns(
-                     "tabela_governanca"
-                  ))),
+  fluidRow(column(
+     7,
      bs4Dash::box(
-        title = tippy::tippy("Contagem de Gênero em Cooperativas de Crédito em 07/2023",
-                             "As informações foram geradas a partir do primeiro nome, podem ter um grau de imprecisão"),
-        shiny::selectInput(
-           ns("cooperativa_select"),
-           "Escolha uma Cooperativa:",
-           choices = c("Todas", read.csv(app_sys("data/202307_CoopCred_BCB_estrutura_governanca.csv")) |>
-                          dplyr::mutate(Cooperativa = paste(cnpj, nomec, sep = " - ")) |> dplyr::select(Cooperativa) |> unique())
-        ),
-        shiny::radioButtons(
-           ns("info_type"),
-           label = "Ver informações por:",
-           choices = c("Órgão", "Cargo"),
-           selected = "Órgão"
-        ),
-        plotly::plotlyOutput(ns("genero_por_cargo"))
+        title = "Estrutura de Governança das Cooperativas de Crédito em 07/2023",
+        reactable::reactableOutput(ns("tabela_governanca")),
+        width = 12
+     )),
+     column(
+        5,
+        bs4Dash::box(
+           title = tippy::tippy(
+              "Contagem de Gênero em Cooperativas de Crédito em 07/2023",
+              "As informações foram geradas a partir do primeiro nome, podem ter um grau de imprecisão"
+           ),
+           width = 12,
+           shiny::selectInput(
+              ns("cooperativa_select"),
+              "Escolha uma Cooperativa:",
+              choices = c(
+                 "Todas",
+                 read.csv(
+                    app_sys("data/202307_CoopCred_BCB_estrutura_governanca.csv")
+                 ) |>
+                    dplyr::mutate(Cooperativa = paste(cnpj, nomec, sep = " - ")) |> dplyr::select(Cooperativa) |> unique()
+              )
+           ),
+           shiny::radioButtons(
+              ns("info_type"),
+              label = "Ver informações por:",
+              choices = c("Órgão", "Cargo"),
+              selected = "Órgão"
+           ),
+           plotly::plotlyOutput(ns("genero_por_cargo"))
+        )
      )
-  )
+     )
 
 }
 
@@ -48,7 +61,8 @@ mod_estrut_gov_server <- function(id){
 
     output$tabela_governanca <- reactable::renderReactable({
        reactable::reactable(
-          estrut_gov,
+          estrut_gov |>
+             dplyr::select(-genero, -Cooperativa),
           columns = list(
              cnpj = reactable::colDef(align = "left"),
              nome = reactable::colDef(align = "left"),
@@ -56,12 +70,13 @@ mod_estrut_gov_server <- function(id){
              cargo = reactable::colDef(align = "left"),
              orgao = reactable::colDef(align = "left")
           ),
-          defaultColDef = reactable::colDef(width = 150),
-          filterable = TRUE,  # Habilitar a filtragem
+          defaultColDef = reactable::colDef(width = 140),
+          filterable = TRUE,        # Habilitar a filtragem
           striped = TRUE,           # Listras na tabela
           highlight = TRUE,         # Destacar linha selecionada
           bordered = TRUE,          # Borda nas células
-          pagination = TRUE         # Paginação
+          pagination = TRUE,        # Paginação
+          height = 590
        )
     })
 

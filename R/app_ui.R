@@ -21,8 +21,8 @@ app_ui <- function(request) {
                   text = "Estrutura de Governança",
                   bs4Dash::bs4SidebarMenuSubItem(text = "Info. Gerais",
                                                  tabName = "infogerais"),
-                  bs4Dash::bs4SidebarMenuSubItem(text = "Estrutura de Governança",
-                                                 tabName = "estrutgov")
+                  bs4Dash::bs4SidebarMenuSubItem(text = "Órgãos Estatutários",
+                                                 tabName = "orgest")
                ),
                bs4Dash::bs4SidebarMenuItem(text = "Distribuição das Coop. Créd.",
                                            tabName = "districoop")
@@ -36,7 +36,7 @@ app_ui <- function(request) {
                                 mod_balancos_patrimoniais_ui("balancos_patrimoniais_1")),
             bs4Dash::bs4TabItem(tabName = "infogerais",
                                 mod_info_gerais_ui("info_gerais_1")),
-            bs4Dash::bs4TabItem(tabName = "estrutgov",
+            bs4Dash::bs4TabItem(tabName = "orgest",
                                 mod_estrut_gov_ui("estrut_gov_1")),
             bs4Dash::bs4TabItem(tabName = "districoop",
                                  mod_dist_coop_ui("dist_coop_1"))

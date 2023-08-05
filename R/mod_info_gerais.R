@@ -12,7 +12,8 @@ mod_info_gerais_ui <- function(id){
 
   bs4Dash::box(
      title = "Informações gerais das Cooperativa de Crédito em 07/2023",
-     reactable::reactableOutput(ns("info_gerais"))
+     reactable::reactableOutput(ns("info_gerais")),
+     width = 12
   )
 
 }
@@ -24,7 +25,12 @@ mod_info_gerais_server <- function(id){
   moduleServer( id, function(input, output, session){
     ns <- session$ns
 
-    info_gerais <- read.csv(app_sys("data/202307_CoopCred_BCB_info_gerais.csv"))
+    qtd_pac <- read.csv(app_sys("data/202307_CoopCred_BCB_numero_de_agencias.csv")) |> dplyr::select(-nome_coop)
+
+    info_gerais <- read.csv(app_sys("data/202307_CoopCred_BCB_info_gerais.csv")) |>
+       dplyr::select(-regimeEspecial, -ato_presi, -nome_Liquidante, -telefone_ddd, -telefone_numero, -filiacao, -filiacao_central) |>
+       dplyr::left_join(qtd_pac, by = "cnpj") |>
+       dplyr::select(cnpj, nome_coop, numeroAgencias, everything())
 
     output$info_gerais <- reactable::renderReactable({
        reactable::reactable(
@@ -34,7 +40,8 @@ mod_info_gerais_server <- function(id){
           striped = TRUE,           # Listras na tabela
           highlight = TRUE,         # Destacar linha selecionada
           bordered = TRUE,          # Borda nas células
-          pagination = TRUE         # Paginação
+          pagination = TRUE,         # Paginação
+          height = 590
        )
     })
 
