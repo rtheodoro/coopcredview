@@ -18,6 +18,7 @@ Imports:
     leaflet,
     plotly,
     reactable,
+    sf,
     shiny (>= 1.7.4.1),
     tippy
 Encoding: UTF-8

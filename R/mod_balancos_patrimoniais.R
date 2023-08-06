@@ -25,7 +25,9 @@ mod_balancos_patrimoniais_ui <- function(id){
                   choices = ""
                )
             ),
+
             mainPanel(
+               reactable::reactableOutput(ns("tabela_cred")),
                plotly::plotlyOutput(ns("g_dist_contas"))
             )
          )
@@ -51,7 +53,7 @@ mod_balancos_patrimoniais_ui <- function(id){
                )
             ),
             mainPanel(
-               echarts4r::echarts4rOutput(ns("g_evolucao_conta"))
+               plotly::plotlyOutput(ns("g_evolucao_conta"))
             )
          )
       )
@@ -91,14 +93,15 @@ mod_balancos_patrimoniais_server <- function(id){
          )
       })
 
-      output$g_evolucao_conta <- echarts4r::renderEcharts4r({
+      output$g_evolucao_conta <- plotly::renderPlotly({
+         filtered_balanco <- balanco  |>
+            dplyr::filter(cooperativa == input$rs_coop)
 
-         balanco |>
-            dplyr::filter(cooperativa == input$rs_coop) |>
-            echarts4r::e_chart(x = ano) |>
-            echarts4r::e_line_(serie = input$conta)
+         plotly::plot_ly(data = filtered_balanco,
+                         x = ~ ano,
+                         y = ~ get(input$conta)) |>
+            plotly::add_lines()
       })
-
 
       updateSelectInput(
          inputId = "conta_dist",
@@ -116,8 +119,26 @@ mod_balancos_patrimoniais_server <- function(id){
             y = ~get(input$conta_dist),
             type = "scatter",
             mode = "markers",
-            text = ~cooperativa
+            text = ~cooperativa,
+            source = "A"
          )
+      })
+
+
+      # Ainda não consegui fazer aparecer
+      output$tabela_cred <- reactable::renderReactable({
+
+         num_linha <- plotly::event_data("plotly_click", source = "A" )$pointNumber
+
+         validate(
+            need(!is.null(num_linha)), "Clique em um ponto no gráfico"
+         )
+
+         balanco |>
+            dplyr::slice(num_linha + 1) |>
+            dplyr::select(cnpj, razao_social) |>
+            reactable::reactable()
+
       })
 
 
