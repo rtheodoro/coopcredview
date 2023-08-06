@@ -29,14 +29,15 @@ mod_inicio_ui <- function(id){
      tags$div(
         tags$h6(tags$strong("Próximos passos:")),
         tags$ul(
-           tags$li("Não consegui adicionar a logo ao lado de CoopCred View (o favicon esta o antigo também)."),
-           tags$li("Item 1: Melhorar a visualização dos balanços. Não estou conseguindo adicionar duas ou mais contas no eixo Y."),
-           tags$li("Item 2: Melhorar mapa."),
-           tags$li("Item 3: Adicionar informações dos auditores independentes."),
-           tags$li("Item 4: Adicionar informações do IF Data."),
-           tags$li("Item 5: Cruzar informações das tabelas"),
-           tags$li("Item 6: Cruzar informações com a base de CNPJ da RFB"),
-           tags$li("Item 7: Cruzar informações com a base de CNPJ da RAIS")
+           tags$li("Não consegui adicionar a logo ao lado de CoopCred View :( (o favicon esta o antigo também)."),
+           tags$li("Melhorar a visualização dos balanços. Não estou conseguindo adicionar duas ou mais contas no eixo Y."),
+           tags$li("Visualizar gênero e cargo por UF."),
+           tags$li("Melhorar mapa."),
+           tags$li("Adicionar informações dos auditores independentes."),
+           tags$li("Adicionar informações do IF Data."),
+           tags$li("Cruzar informações das tabelas"),
+           tags$li("Cruzar informações com a base de CNPJ da RFB"),
+           tags$li("Cruzar informações com a base de CNPJ da RAIS")
         )
      ),
      p(tags$strong("Contato:"), "rtheodoro@usp.br")
