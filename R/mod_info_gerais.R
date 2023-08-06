@@ -10,11 +10,34 @@
 mod_info_gerais_ui <- function(id){
   ns <- NS(id)
 
-  bs4Dash::box(
-     title = "Informações gerais das Cooperativa de Crédito em 08/2023",
-     reactable::reactableOutput(ns("info_gerais")),
-     width = 12
+
+  fluidRow(
+     bs4Dash::box(
+        title = "Informações gerais das Cooperativa de Crédito em 08/2023",
+        reactable::reactableOutput(ns("info_gerais")),
+        width = 6
+     ),
+     bs4Dash::box(
+        title = tippy::tippy(
+           "Visualização Geral das Cooperativas de Crédito",
+           "Estavam ativas em 08/2023"
+        ),
+        solidHeader = TRUE,
+        collapsible = FALSE,
+        width = 6,
+        shiny::radioButtons(
+           ns("classe"),
+           label = tippy::tippy("Selecione a classe:", "Algumas não preencheram esta informação"),
+           choices = c("Todas", "Singular", "Central", "Confederação"),
+           selected = "Todas"
+        ),
+
+        plotly::plotlyOutput(ns("g_dist_est"))
+
+     )
   )
+
+
 
 }
 
@@ -41,6 +64,39 @@ mod_info_gerais_server <- function(id){
           bordered = TRUE,          # Borda nas células
           pagination = TRUE,        # Paginação
           height = 590
+       )
+    })
+
+
+    filtered_data <- reactive({
+       if (input$classe == "Singular") {
+          coluna <- "Singular"
+       } else if (input$classe == "Central") {
+          coluna <- "Central"
+       } else if (input$classe == "Confederação") {
+          coluna <- "Confederação"
+       } else {
+          coluna <- c("Singular", "Central", "Confederação")
+       }
+
+       list(coluna = coluna)
+    })
+
+    output$g_dist_est <- plotly::renderPlotly({
+       filtered <- filtered_data()
+
+       cooperativas_por_uf <- info_gerais  |>
+          dplyr::filter(classe %in% filtered$coluna) |>
+          dplyr::group_by(uf)  |>
+          dplyr::summarise(qtd_cooperativas = dplyr::n())  |>
+          dplyr::arrange(qtd_cooperativas) # Não está organizando as barras
+
+       plotly::plot_ly(
+          data = cooperativas_por_uf,
+          x = ~qtd_cooperativas,
+          y = ~uf,
+          type = "bar",
+          orientation = 'h'
        )
     })
 

@@ -10,31 +10,54 @@
 mod_balancos_patrimoniais_ui <- function(id){
    ns <- NS(id)
 
-   bs4Dash::box(
-      title = tippy::tippy("Visualização de informações financeiras das Cooperativas de Crédito", "Que enviaram seus balanços em 12/2022 e estavam ativas em 08/2023"),
-      solidHeader = TRUE,
-      collapsible = FALSE,
-      width = 12,
-      p(tippy::tippy("Balanço Patrimonial (4010).", "Consulte em: https://www.bcb.gov.br/acessoinformacao/legado?url=https:%2F%2Fwww4.bcb.gov.br%2Ffis%2Fcosif%2Fbalancetes.asp",  placement = "right")),
-      sidebarLayout(
-         sidebarPanel(
-            selectInput(
-               inputId = ns("rs_coop"),
-               label = "Selecione uma Cooperativa",
-               choices = ""
+   fluidRow(
+      bs4Dash::box(
+         title = tippy::tippy("Visualização Geral das Cooperativas de Crédito", "Que enviaram Balanço Patrimonial (Doc. 4010) em 12/2022 e estavam ativas em 08/2023"),
+         solidHeader = TRUE,
+         collapsible = FALSE,
+         width = 12,
+         p(""),
+         sidebarLayout(
+            sidebarPanel(
+               selectInput(
+                  inputId = ns("conta_dist"),
+                  label = "Selecione uma conta",
+                  choices = ""
+               )
             ),
-            selectInput(
-               inputId = ns("conta"),
-               label = "Selecione uma conta",
-               choices = ""
+            mainPanel(
+               plotly::plotlyOutput(ns("g_dist_contas"))
             )
-         ),
-         mainPanel(
-            echarts4r::echarts4rOutput(ns("g_evolucao_conta"))
+         )
+      ),
+
+      bs4Dash::box(
+         title = tippy::tippy("Visualização de informações financeiras por Cooperativa de Crédito", "Que enviaram Balanço Patrimonial (Doc. 4010) em 12/2022 e estavam ativas em 08/2023"),
+         solidHeader = TRUE,
+         collapsible = FALSE,
+         width = 12,
+         p(),
+         sidebarLayout(
+            sidebarPanel(
+               selectInput(
+                  inputId = ns("rs_coop"),
+                  label = "Selecione uma Cooperativa",
+                  choices = ""
+               ),
+               selectInput(
+                  inputId = ns("conta"),
+                  label = "Selecione uma conta",
+                  choices = ""
+               )
+            ),
+            mainPanel(
+               echarts4r::echarts4rOutput(ns("g_evolucao_conta"))
+            )
          )
       )
-   )
 
+
+)
 }
 
 #' balancos_patrimoniais Server Functions
@@ -75,6 +98,29 @@ mod_balancos_patrimoniais_server <- function(id){
             echarts4r::e_chart(x = ano) |>
             echarts4r::e_line_(serie = input$conta)
       })
+
+
+      updateSelectInput(
+         inputId = "conta_dist",
+         choices = balanco |>
+            dplyr::select(where(~ any(!is.na(.))), -ano, -cnpj, -razao_social, -cooperativa) |>
+            names() |>
+            unique()
+      )
+
+      output$g_dist_contas <- plotly::renderPlotly({
+
+         plotly::plot_ly(
+            data = balanco,
+            x = ~ano,
+            y = ~get(input$conta_dist),
+            type = "scatter",
+            mode = "markers",
+            text = ~cooperativa
+         )
+      })
+
+
 
    })
 }
