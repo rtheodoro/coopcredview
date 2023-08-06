@@ -83,7 +83,7 @@ mod_balancos_patrimoniais_server <- function(id){
          req(input$rs_coop)
          conta <- balanco |>
             dplyr::filter(cooperativa == input$rs_coop) |>
-            dplyr::select(where(~ any(!is.na(.))), -ano, -cnpj, -razao_social, -cooperativa) |>
+            dplyr::select(tidyselect::where(~ any(!is.na(.))), -ano, -cnpj, -razao_social, -cooperativa) |>
             names() |>
             unique()
 
@@ -106,7 +106,7 @@ mod_balancos_patrimoniais_server <- function(id){
       updateSelectInput(
          inputId = "conta_dist",
          choices = balanco |>
-            dplyr::select(where(~ any(!is.na(.))), -ano, -cnpj, -razao_social, -cooperativa) |>
+            dplyr::select(tidyselect::where(~ any(!is.na(.))), -ano, -cnpj, -razao_social, -cooperativa) |>
             names() |>
             unique()
       )
