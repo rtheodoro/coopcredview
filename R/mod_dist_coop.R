@@ -47,17 +47,17 @@ mod_dist_coop_server <- function(id){
   moduleServer( id, function(input, output, session){
     ns <- session$ns
 
-    qtd_pac <- read.csv(app_sys("data/202308_CoopCred_BCB_numero_de_agencias.csv")) |> dplyr::select(-nome_coop)
+    qtd_pac <- read.csv(app_sys("202308_CoopCred_BCB_numero_de_agencias.csv")) |> dplyr::select(-nome_coop)
 
-    geo_estados <- readRDS(app_sys("data/geo_estados.rds"))
+    geo_estados <- readRDS(app_sys("geo_estados.rds"))
 
-    info_gerais <- read.csv(app_sys("data/202308_CoopCred_BCB_info_gerais.csv")) |>
+    info_gerais <- read.csv(app_sys("202308_CoopCred_BCB_info_gerais.csv")) |>
        dplyr::select(-regimeEspecial, -ato_presi, -nome_Liquidante, -telefone_ddd, -telefone_numero, -filiacao, -filiacao_central) |>
        dplyr::mutate(matriz_filial = "M") |>
        dplyr::left_join(qtd_pac, by = "cnpj") |>
        dplyr::select(cnpj, nome_coop, numeroAgencias, classe, municipio, uf)
 
-    rede_atendimento <- read.csv(app_sys("data/202308_CoopCred_BCB_rede_atendimento.csv")) |>
+    rede_atendimento <- read.csv(app_sys("202308_CoopCred_BCB_rede_atendimento.csv")) |>
        dplyr::select(cnpj, municipio, uf) |>
        dplyr::mutate(matriz_filial = "F") |>
        dplyr::left_join(info_gerais |> dplyr::select(cnpj, nome_coop))

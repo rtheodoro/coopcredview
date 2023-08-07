@@ -48,11 +48,11 @@ mod_info_gerais_server <- function(id){
   moduleServer( id, function(input, output, session){
     ns <- session$ns
 
-    qtd_pac <- read.csv(app_sys("data/202308_CoopCred_BCB_numero_de_agencias.csv")) |> dplyr::select(-nome_coop)
-    info_gerais <- read.csv(app_sys("data/202308_CoopCred_BCB_info_gerais.csv")) |>
+    qtd_pac <- read.csv(app_sys("202308_CoopCred_BCB_numero_de_agencias.csv")) |> dplyr::select(-nome_coop)
+    info_gerais <- read.csv(app_sys("202308_CoopCred_BCB_info_gerais.csv")) |>
        dplyr::select(-regimeEspecial, -ato_presi, -nome_Liquidante, -telefone_ddd, -telefone_numero, -filiacao, -filiacao_central) |>
        dplyr::left_join(qtd_pac, by = "cnpj") |>
-       dplyr::select(cnpj, nome_coop, numeroAgencias, everything())
+       dplyr::select(cnpj, nome_coop, numeroAgencias, tidyselect::everything())
 
     output$info_gerais <- reactable::renderReactable({
        reactable::reactable(

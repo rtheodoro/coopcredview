@@ -31,7 +31,7 @@ mod_estrut_gov_ui <- function(id){
               choices = c(
                  "Todas",
                  read.csv(
-                    app_sys("data/202308_CoopCred_BCB_estrutura_governanca.csv")
+                    app_sys("202308_CoopCred_BCB_estrutura_governanca.csv")
                  ) |>
                     dplyr::mutate(Cooperativa = paste(cnpj, nomec, sep = " - ")) |> dplyr::select(Cooperativa) |> unique()
               )
@@ -56,7 +56,7 @@ mod_estrut_gov_server <- function(id){
   moduleServer( id, function(input, output, session){
     ns <- session$ns
 
-    estrut_gov <- read.csv(app_sys("data/202308_CoopCred_BCB_estrutura_governanca.csv")) |>
+    estrut_gov <- read.csv(app_sys("202308_CoopCred_BCB_estrutura_governanca.csv")) |>
        dplyr::mutate(Cooperativa = paste(cnpj, nomec, sep = " - "))
 
     output$tabela_governanca <- reactable::renderReactable({

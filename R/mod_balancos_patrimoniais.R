@@ -69,9 +69,9 @@ mod_balancos_patrimoniais_server <- function(id){
    moduleServer( id, function(input, output, session){
       ns <- session$ns
 
-      balanco <- data.table::fread(app_sys("data/balanco_coop_cred_1993a2022_4010.csv")) |>
+      balanco <- data.table::fread(app_sys("balanco_coop_cred_1993a2022_4010.csv")) |>
          dplyr::mutate(cooperativa = paste(cnpj, razao_social, sep = " - "),
-                       cooperativa = iconv(cooperativa,  "latin1", "UTF-8", "?"))
+                       cooperativa = iconv(cooperativa, "latin1", "UTF-8", "?"))
 
 
       updateSelectInput(

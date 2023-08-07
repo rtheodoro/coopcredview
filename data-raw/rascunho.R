@@ -16,7 +16,7 @@ balanco <- balanco  |>
    dplyr::ungroup()
 
 
-dicionario <- data.table::fread(app_sys("data/dicionario.CSV"))  |> janitor::clean_names() |> dplyr::mutate(nome_conta = iconv(nome_conta,  "ASCII", "UTF-8", ""))
+dicionario <- data.table::fread(app_sys("dicionario.CSV"))  |> janitor::clean_names() |> dplyr::mutate(nome_conta = iconv(nome_conta,  "ASCII", "UTF-8", ""))
 
 
 nomes_correspondentes <- dicionario$nome_conta[match(names(balanco), dicionario$conta)]
@@ -26,17 +26,17 @@ colnames(balanco) <- ifelse(!is.na(nomes_correspondentes),
                             names(balanco))
 
 
-ativas082023 <- read.csv(app_sys("data/202308_CoopCred_BCB_info_gerais.csv")) |> dplyr::select(cnpj)
+ativas082023 <- read.csv(app_sys("202308_CoopCred_BCB_info_gerais.csv")) |> dplyr::select(cnpj)
 
 balanco <- balanco |> dplyr::filter(cnpj %in% ativas082023$cnpj) |> janitor::clean_names()
 
-write.csv(balanco, "inst/data/balanco_coop_cred_1993a2022_4010.csv", row.names = FALSE)
+write.csv(balanco, "inst/balanco_coop_cred_1993a2022_4010.csv", row.names = FALSE)
 
 # Importando arquivos baixados ----
-estrutGov <- read.csv(app_sys("data/202308_CoopCred_BCB_estrutura_governanca.csv"))
+estrutGov <- read.csv(app_sys("202308_CoopCred_BCB_estrutura_governanca.csv"))
 
 
-nomes_mulheres <- read.csv(app_sys("data/nomes.csv")) # csv baixando manualmente de um site com listas de nomes
+nomes_mulheres <- read.csv(app_sys("nomes.csv")) # csv baixando manualmente de um site com listas de nomes
 
 nomes_mulheres <- nomes_mulheres |>
    dplyr::select(classification, first_name) |>
