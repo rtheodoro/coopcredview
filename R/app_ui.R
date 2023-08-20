@@ -29,7 +29,9 @@ app_ui <- function(request) {
                   bs4Dash::bs4SidebarMenuSubItem(text = "Informações Gerais",
                                                  tabName = "infogerais"),
                   bs4Dash::bs4SidebarMenuSubItem(text = "Órgãos Estatutários",
-                                                 tabName = "orgest")
+                                                 tabName = "orgest"),
+                  bs4Dash::bs4SidebarMenuSubItem(text = "Auditoria",
+                                                 tabName = "auditoria")
                ),
                bs4Dash::bs4SidebarMenuItem(text = "Distribuição das Coop. Créd.",
                                            tabName = "districoop")
@@ -45,6 +47,8 @@ app_ui <- function(request) {
                                 mod_info_gerais_ui("info_gerais_1")),
             bs4Dash::bs4TabItem(tabName = "orgest",
                                 mod_estrut_gov_ui("estrut_gov_1")),
+            bs4Dash::bs4TabItem(tabName = "auditoria",
+                                mod_auditoria_ui("auditoria_1")),
             bs4Dash::bs4TabItem(tabName = "districoop",
                                  mod_dist_coop_ui("dist_coop_1"))
          ))
