@@ -143,7 +143,7 @@ mod_balancos_patrimoniais_server <- function(id){
 
 
 
-   })
+    })
 }
 
 ## To be copied in the UI

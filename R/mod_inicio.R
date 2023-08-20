@@ -22,8 +22,7 @@ mod_inicio_ui <- function(id){
         tags$ul(
            tags$li("Código deste app:", tags$a("https://github.com/rtheodoro/coopcredview", href = "https://github.com/rtheodoro/coopcredview", target = "_blank")),
            tags$li("Código do webscraping dos Órgãos Estatutários:", tags$a("https://github.com/rtheodoro/orgaos-estatutarios-coop-cred-bacen", href = "https://github.com/rtheodoro/orgaos-estatutarios-coop-cred-bacen", target = "_blank")),
-           tags$li("Código do webscraping dos Balanços Patrimoniais:", tags$a("https://github.com/rtheodoro/webscraping-balancos-patrimoniais-de-coop-cred", href = "https://github.com/rtheodoro/webscraping-balancos-patrimoniais-de-coop-cred", target = "_blank")),
-           tags$li("Fique a vontade para contribuir e deixar a estrelinha! :D")
+           tags$li("Código do webscraping dos Balanços Patrimoniais:", tags$a("https://github.com/rtheodoro/webscraping-balancos-patrimoniais-de-coop-cred", href = "https://github.com/rtheodoro/webscraping-balancos-patrimoniais-de-coop-cred", target = "_blank"))
         )
      ),
      tags$div(

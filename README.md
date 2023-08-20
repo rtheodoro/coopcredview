@@ -1,5 +1,5 @@
 
-# coopcredview
+# [coopcredview](https://rtheodoro.shinyapps.io/coopcredview/)
 
 <!-- badges: start -->
 <!-- badges: end -->
@@ -15,4 +15,4 @@ Os dados serão coletados do [Banco Central do Brasil - BACEN](https://www.bcb.g
 Este dashboard foi criado para servir como trabalho final do curso de Dashboard II da Curso-R
 
 
-terminar de inserir informações
+Acesso em: [https://rtheodoro.shinyapps.io/coopcredview/](https://rtheodoro.shinyapps.io/coopcredview/)
