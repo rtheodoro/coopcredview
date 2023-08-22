@@ -33,7 +33,6 @@ mod_inicio_ui <- function(id){
            tags$li("Melhorar a visualização dos balanços. Não estou conseguindo adicionar reactable quando clicka no gráfico."),
            tags$li("Visualizar gênero e cargo por UF."),
            tags$li("Melhorar mapa. Adicionar mapa que exiba quantas Matriz e Filiais existem por Municipio e UF"),
-           tags$li("Adicionar informações dos auditores independentes."),
            tags$li("Adicionar informações do IF Data."),
            tags$li("Cruzar informações das tabelas"),
            tags$li("Cruzar informações com a base de CNPJ da RFB"),

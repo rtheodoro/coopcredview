@@ -91,14 +91,14 @@ mod_auditoria_server <- function(id){
     # output$g_dist_est <- plotly::renderPlotly({
     #    filtered <- filtered_data()
     #
-    #    cooperativas_por_uf <- info_gerais  |>
+    #    cooperativas_por_auditor <- auditor_independente  |>
     #       dplyr::filter(classe %in% filtered$coluna) |>
-    #       dplyr::group_by(uf)  |>
+    #       dplyr::group_by(big_four)  |>
     #       dplyr::summarise(qtd_cooperativas = dplyr::n())  |>
     #       dplyr::arrange(qtd_cooperativas) # Não está organizando as barras
     #
     #    plotly::plot_ly(
-    #       data = cooperativas_por_uf,
+    #       data = cooperativas_por_auditor,
     #       x = ~qtd_cooperativas,
     #       y = ~uf,
     #       type = "bar",
