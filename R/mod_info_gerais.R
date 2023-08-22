@@ -76,7 +76,7 @@ mod_info_gerais_server <- function(id){
        } else if (input$classe == "Confederação") {
           coluna <- "Confederação"
        } else {
-          coluna <- c("Singular", "Central", "Confederação", is.na(classe))
+          coluna <- c("Singular", "Central", "Confederação")
        }
 
        list(coluna = coluna)
