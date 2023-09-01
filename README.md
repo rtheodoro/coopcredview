@@ -16,3 +16,6 @@ Este dashboard foi criado para servir como trabalho final do curso de Dashboard 
 
 
 Acesso em: [https://rtheodoro.shinyapps.io/coopcredview/](https://rtheodoro.shinyapps.io/coopcredview/)
+
+
+OBS: para subir no shinyapps.io, é preciso antes rodar `renv::install("githubuser/projeto")`
