@@ -1,11 +1,9 @@
-.brand-link .brand-image  {
-    display: flex; /* Usar flex para centralizar verticalmente */
-    align-items: center; /* Centralizar verticalmente */
-    justify-content: center; /* Centralizar horizontalmente */
-    line-height: 0; /* Remover espaço extra na linha */
-    margin-left: .2rem;
-    margin-right: .2rem;
-    margin-top: -3px;
-    max-height: 32px;
-    width: 40px; /* Aumentar o tamanho do box */
+.titulo_logo {
+  color: white;
+  font-size: 30px;
+  align-items: center;
+  margin-top: 1px;
+  border-bottom: 1px solid #4b545c;
+
 }
+
