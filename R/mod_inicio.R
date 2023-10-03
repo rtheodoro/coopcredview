@@ -28,7 +28,6 @@ mod_inicio_ui <- function(id){
      tags$div(
         tags$h6(tags$strong("Próximos passos:")),
         tags$ul(
-           tags$li("Não consegui adicionar a logo ao lado de CoopCred View :( (o favicon esta o antigo também)."),
            tags$li("Melhorar a visualização dos balanços. Não estou conseguindo adicionar duas ou mais contas no eixo Y."),
            tags$li("Melhorar a visualização dos balanços. Não estou conseguindo adicionar reactable quando clicka no gráfico."),
            tags$li("Visualizar gênero e cargo por UF."),

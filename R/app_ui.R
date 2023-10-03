@@ -10,14 +10,10 @@ app_ui <- function(request) {
       golem_add_external_resources(),
       # Your application UI logic
       bs4Dash::bs4DashPage(
-            bs4Dash::bs4DashNavbar(title = "CoopCred View",
-            bs4Dash::bs4DashBrand(
-            title = "",
-            image = "logo_coopcreview_teste2.png" # Tentativa de adicionar o logo ao lado de CoopCred View
-         )),
+         bs4Dash::bs4DashNavbar(
+            title = "CoopCred View"
+           ),
          bs4Dash::bs4DashSidebar(
-            # div(class = "logo",
-            #     img(src = "logo_coopcreview_teste2.png")),
             bs4Dash::bs4SidebarMenu(
 
                bs4Dash::bs4SidebarMenuItem(text = "Início",

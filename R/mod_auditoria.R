@@ -13,13 +13,13 @@ mod_auditoria_ui <- function(id){
 
   fluidRow(
      bs4Dash::box(
-        title = "Informações sobre auditoria das Cooperativa de Crédito em 08/2023",
+        title = "Informações sobre auditoria independente das Cooperativa de Crédito em 08/2023",
         reactable::reactableOutput(ns("auditor_ind")),
         width = 6
      ),
      bs4Dash::box(
         title = tippy::tippy(
-           "Visualização Geral das Cooperativas de Crédito",
+           "Visualização da Auditoria das Cooperativas de Crédito",
            "Estavam ativas em 08/2023"
         ),
         solidHeader = TRUE,
@@ -31,11 +31,20 @@ mod_auditoria_ui <- function(id){
            choices = c("Todas", "Singular", "Central", "Confederação"),
            selected = "Todas"
         ),
-
         plotly::plotlyOutput(ns("g_audit"))
-
+     ),
+     bs4Dash::box(
+        title = "Informações sobre auditoria das Cooperativa de Crédito por Tamanho (em construção)",
+        reactable::reactableOutput(ns("audit_tam")),
+        width = 6
+     ),
+     bs4Dash::box(
+        title = "Novo Gráfico em Construção",
+        plotly::plotlyOutput(ns("novo_plotly_output")),
+        width = 6
      )
-   )
+  )
+
 }
 
 #' auditoria Server Functions
@@ -57,8 +66,6 @@ mod_auditoria_server <- function(id){
        ) |>
        dplyr::left_join(read.csv(app_sys("202308_CoopCred_BCB_info_gerais.csv")) |> dplyr::select(cnpj, classe))
 
-    comite_auditoria <- read.csv(app_sys("202308_CoopCred_BCB_comite_auditoria.csv"))
-
 
     output$auditor_ind <- reactable::renderReactable({
        reactable::reactable(
@@ -74,37 +81,39 @@ mod_auditoria_server <- function(id){
     })
 
 
-    # filtered_data <- reactive({
-    #    if (input$classe == "Singular") {
-    #       coluna <- "Singular"
-    #    } else if (input$classe == "Central") {
-    #       coluna <- "Central"
-    #    } else if (input$classe == "Confederação") {
-    #       coluna <- "Confederação"
-    #    } else {
-    #       coluna <- c("Singular", "Central", "Confederação", is.na(classe))
-    #    }
-    #
-    #    list(coluna = coluna)
-    # })
-    #
-    # output$g_dist_est <- plotly::renderPlotly({
-    #    filtered <- filtered_data()
-    #
-    #    cooperativas_por_auditor <- auditor_independente  |>
-    #       dplyr::filter(classe %in% filtered$coluna) |>
-    #       dplyr::group_by(big_four)  |>
-    #       dplyr::summarise(qtd_cooperativas = dplyr::n())  |>
-    #       dplyr::arrange(qtd_cooperativas) # Não está organizando as barras
-    #
-    #    plotly::plot_ly(
-    #       data = cooperativas_por_auditor,
-    #       x = ~qtd_cooperativas,
-    #       y = ~uf,
-    #       type = "bar",
-    #       orientation = 'h'
-    #    )
-    # })
+    filtered_data <- reactive({
+       if (input$classe == "Singular") {
+          coluna <- "Singular"
+       } else if (input$classe == "Central") {
+          coluna <- "Central"
+       } else if (input$classe == "Confederação") {
+          coluna <- "Confederação"
+       } else {
+          coluna <- c("Singular", "Central", "Confederação")
+       }
+
+       list(coluna = coluna)
+    })
+
+    output$g_audit <- plotly::renderPlotly({
+       filtered <- filtered_data()
+
+       cooperativas_por_auditor <- auditor_independente  |>
+          dplyr::filter(classe %in% filtered$coluna) |>
+          dplyr::group_by(big_four)  |>
+          dplyr::summarise(qtd_cooperativas = dplyr::n())  |>
+          dplyr::arrange(qtd_cooperativas) # Não está organizando as barras
+
+       plotly::plot_ly(
+          data = cooperativas_por_auditor,
+          x = ~qtd_cooperativas,
+          y = ~big_four,
+          type = "bar",
+          orientation = 'h'
+       )
+    })
+
+
 
   })
 }
