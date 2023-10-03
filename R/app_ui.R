@@ -11,7 +11,7 @@ app_ui <- function(request) {
       # Your application UI logic
       bs4Dash::bs4DashPage(
          bs4Dash::bs4DashNavbar(
-            title = tags$span(tags$img(src="www/logo_coopcreview.png", alt = "logo", width = 40, height = 40),
+            title = tags$div(tags$img(src="www/logo_coopcreview.png", alt = "logo", width = 40, height = 40),
                               tags$strong("CoopCred View"),
                               class = "titulo_logo")
 
