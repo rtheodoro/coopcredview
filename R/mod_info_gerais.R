@@ -89,7 +89,7 @@ mod_info_gerais_server <- function(id){
           dplyr::filter(classe %in% filtered$coluna) |>
           dplyr::group_by(uf)  |>
           dplyr::summarise(qtd_cooperativas = dplyr::n())  |>
-          dplyr::arrange(qtd_cooperativas) # Não está organizando as barras
+          dplyr::mutate(uf = reorder(uf, qtd_cooperativas))  # Não está organizando as barras
 
        plotly::plot_ly(
           data = cooperativas_por_uf,

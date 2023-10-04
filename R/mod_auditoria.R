@@ -32,17 +32,18 @@ mod_auditoria_ui <- function(id){
            selected = "Todas"
         ),
         plotly::plotlyOutput(ns("g_audit"))
-     ),
-     bs4Dash::box(
-        title = "Informações sobre auditoria das Cooperativa de Crédito por Tamanho (em construção)",
-        reactable::reactableOutput(ns("audit_tam")),
-        width = 6
-     ),
-     bs4Dash::box(
-        title = "Novo Gráfico em Construção",
-        plotly::plotlyOutput(ns("novo_plotly_output")),
-        width = 6
      )
+     # ),
+     # bs4Dash::box(
+     #    title = "Informações sobre auditoria das Cooperativa de Crédito por Tamanho (em construção)",
+     #    reactable::reactableOutput(ns("audit_tam")),
+     #    width = 6
+     # ),
+     # bs4Dash::box(
+     #    title = "Novo Gráfico em Construção",
+     #    plotly::plotlyOutput(ns("novo_plotly_output")),
+     #    width = 6
+     # )
   )
 
 }
