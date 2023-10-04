@@ -97,7 +97,11 @@ mod_info_gerais_server <- function(id){
           y = ~uf,
           type = "bar",
           orientation = 'h'
-       )
+       ) |>
+          plotly::layout(
+             xaxis = list(title = "Quantidade de Cooperativas"),
+             yaxis = list(title = "UF")
+          )
     })
 
   })

@@ -67,6 +67,7 @@ mod_auditoria_server <- function(id){
        dplyr::left_join(read.csv(app_sys("202308_CoopCred_BCB_info_gerais.csv")) |> dplyr::select(cnpj, classe))
 
 
+
     output$auditor_ind <- reactable::renderReactable({
        reactable::reactable(
           auditor_independente,
@@ -102,14 +103,18 @@ mod_auditoria_server <- function(id){
           dplyr::filter(classe %in% filtered$coluna) |>
           dplyr::group_by(big_four)  |>
           dplyr::summarise(qtd_cooperativas = dplyr::n())  |>
-          dplyr::arrange(qtd_cooperativas) # Não está organizando as barras
+          dplyr::arrange(qtd_cooperativas)
 
        plotly::plot_ly(
           data = cooperativas_por_auditor,
-          x = ~qtd_cooperativas,
-          y = ~big_four,
+          x = ~ qtd_cooperativas,
+          y = ~ big_four,
           type = "bar",
           orientation = 'h'
+       ) |>
+       plotly::layout(
+          xaxis = list(title = "Quantidade de Cooperativas"),
+          yaxis = list(title = "Big Four")
        )
     })
 

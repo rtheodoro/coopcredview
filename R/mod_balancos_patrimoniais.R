@@ -100,7 +100,11 @@ mod_balancos_patrimoniais_server <- function(id){
          plotly::plot_ly(data = filtered_balanco,
                          x = ~ ano,
                          y = ~ get(input$conta)) |>
-            plotly::add_lines()
+            plotly::add_lines() |>
+            plotly::layout(
+               xaxis = list(title = "Ano"),
+               yaxis = list(title = input$conta)
+            )
       })
 
       updateSelectInput(
@@ -121,7 +125,11 @@ mod_balancos_patrimoniais_server <- function(id){
             mode = "markers",
             text = ~cooperativa,
             source = "A"
-         )
+         ) |>
+            plotly::layout(
+               xaxis = list(title = "Ano"),
+               yaxis = list(title = input$conta_dist)
+            )
       })
 
 

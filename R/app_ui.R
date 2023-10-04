@@ -14,8 +14,6 @@ app_ui <- function(request) {
             title = tags$div(tags$img(src="www/logo_coopcreview.png", alt = "logo", width = 40, height = 40),
                               tags$strong("CoopCred View"),
                               class = "titulo_logo")
-
-            #title = "TESTE"
            ),
          bs4Dash::bs4DashSidebar(
             bs4Dash::bs4SidebarMenu(
